@@ -1,3 +1,13 @@
+# Alexander Holmes 
+# CIS-226 Web programming - Flask
+# 10/5/22
+
+""" 
+    This file contains the flask website's routes and logic
+    This file should come with a static folder, templates, requirements.txt,
+    and a user created virtual enviornment if wanted to run locally
+"""
+
 from flask import (
     Flask,
     render_template,
