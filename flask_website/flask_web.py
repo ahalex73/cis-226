@@ -49,5 +49,14 @@ def contacts():
 
     return render_template('contacts.html')
 
+@app.route('/design')
+def design():
+    if request.method =="GET":
+        ''' Shows we move to design page'''
+
+        print("Redirecting to design")
+
+    return render_template('design.html')
+
 
 
