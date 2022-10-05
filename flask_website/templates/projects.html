@@ -1,0 +1,46 @@
+<!--- 
+    Alexander Holmes 
+    CIS-226 Web programming - Flask
+    9/15/22 -->
+    {% extends "base.html" %}
+
+    {% block content %}
+    
+    <div class="container float-left text-dark" style="margin:15px">
+        <h1>Projects</h1>
+        <ul class="list-group float-left">
+            <li class="list-group-item"><div class="card" style="width: 18rem;">
+                <img src="{{ url_for('static', filename='images/pong.png') }}" class="card-img-top" alt="pong.png" width="100%" height="100%">
+                <div class="card-body">
+                  <h5 class="card-title">Pygame Pong</h5>
+                  <p class="card-text text-secondary">With the pygame module I was able to create a basic version of pong! (Not my photo/project)</p>
+                  <a href="#" class="btn btn-primary">Demo</a>
+                </div>
+              </div>
+            </li>
+    
+    
+            <li class="list-group-item">
+                <div class="card" style="width: 18rem;">
+                  <img src="{{ url_for('static', filename='images/RobloxTDF.png') }}" class="card-img-top" alt="RobloxTDF.png" width="100%" height="100%">
+                <div class="card-body">
+                  <h5 class="card-title">Roblox Tower defense game</h5>
+                  <p class="card-text text-secondary">With the roblox studio, I was able to create a very template tower defence game, that includes 3D raycasting.</p>
+                  <a href="#" class="btn btn-primary">Demo</a>
+                </div>
+              </div></li>
+    
+    
+            <li class="list-group-item"><div class="card" style="width: 18rem;">
+              <img src="{{ url_for('static', filename='images/p5Sphere.png') }}" class="card-img-top" alt="P5Sphere.png" width="100%" height="100%">
+                <div class="card-body">
+                  <h5 class="card-title">Creating a flashing globe with Processing 5</h5>
+                  <p class="card-text text-secondary">The globe is created using triangles that create vectors along the surface of the sphere.</p>
+                  <a href="#" class="btn btn-primary">Demo</a>
+                </div>
+              </div></li>
+        </ul>
+    </div>
+
+    {% endblock content %}
+    

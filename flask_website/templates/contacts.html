@@ -1,0 +1,34 @@
+<!--- 
+    Alexander Holmes 
+    CIS-226 Web programming - Flask
+    9/15/22 -->
+    {% extends "base.html" %}
+
+    {% block content %}
+    
+
+<div class="container-md float-left" style="margin:15px">
+        <h1>How to contact me!</h1>
+        <p class="container-md text-secondary">Phone: 269-929-5805<br>Email: Ahalex73@yahoo.com</p>
+    
+    
+        <div class="mb-3">
+            <form method="POST">
+            <label for="email-add" class="form-label">Email address</label>
+            <input type="email" class="form-control" name="email-add" placeholder="Your email address">
+        </div>
+        <div class="mb-3">
+            <label for="email-content" class="form-label">Your inquiry</label>
+            <textarea class="form-control" name="email-content" rows="3" placeholder="Enter"></textarea>
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    {% endblock content %}
+    
+    
+    
+    <!--The last page will be a contact page on how to get in contact with you. This could include links to your LinkedIn, Github, and other platforms that are relevant.
+         In addition, it ought to have the standard contact information so that potential employers can reach you. In the sample I linked above, I included a form. You do not need to do this.-->
