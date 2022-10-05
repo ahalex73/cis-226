@@ -1,0 +1,10 @@
+# Alexander Holmes
+# 9/9/22
+# CRN: 10235
+# CIS 226: Advanced Python Programming
+# TOTAL TIME TO COMPLETE: --- hours ---
+
+The dog goes bark
+The cat goes meow
+The duck goes quack
+The chicken goes cluck

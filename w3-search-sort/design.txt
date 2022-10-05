@@ -1,0 +1,18 @@
+Alexander Holmes
+9/22/2022
+CRN:10235
+CIS 226: Advanced Python Programming
+Total time estimate: 3 hours
+
+Design: The design of the search_and_sort program was to display the efficiencies of
+different searching and sorting algorithms. This program was to be implemented
+using python and the pytest API.
+
+Develop: To solve the problem, it was necessary in understanding how these algorithms work by 
+researching/ using the given materials on some basic searching and sorting algorithms.
+
+Test: The test_seach_and_sort.py file uses pytest to test the selection sort I implemented.
+It accomplishes this by comparing the expected sorted array with the one given back to us from the my_selection_sort function.
+
+Document: The search_and_sort.py file demonstrates to the end user implementations of various searching and sorting algorithms. 
+The test_seach_and_sort.py tests the my_selection_sort() function.

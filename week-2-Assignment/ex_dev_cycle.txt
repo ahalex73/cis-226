@@ -1,0 +1,23 @@
+Alexander Holmes
+9/9/22
+CRN: 10235
+CIS 226: Advanced Python Programming
+TOTAL TIME TO COMPLETE: --- 5 hours ---
+
+
+Design: The design of the mygrep utility tool was intended for the end user
+to use in a command line. This program was to be implemented using python and
+the pytest API. 
+
+Develop: To solve the problem, it was necessary in understanding system arguments,
+file I/O, and researching the documentation of the pytest API. 
+
+Test: In the simple test created we pass our test if the line given back in our
+output contains "jacob" in the given text file "students.txt". The point
+in this test is to ensure that our programs intended utility is working
+properly.
+
+The mygrep.py file is the program that the end user runs, it is what has the
+functionality of finding a given search text within a given file. The 
+test_mygrep.py file is to be used with a virtual enviornment running pytest, 
+which tests to see if the given output is correct. 
