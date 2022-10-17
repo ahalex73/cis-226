@@ -73,14 +73,14 @@ def main():
 
                     pass
 
-                # elif event =='binary_search':
+                elif event =='binary_search':
                     
-                #     search_value = values['search_value']
-                #     array = values['user_list']
+                    search_value = values['search_value']
+                    array = values['user_list']
 
-                #     sorted_user_array = self.binary_search(search_value, array)
+                    sorted_user_array = self.binary_search(search_value, array)
 
-                #     return
+                    return
 
         def validate_list(self, events, values):
             ''' Handle when enter button is pressed'''
