@@ -4,7 +4,23 @@
 # CIS 226: Advanced Python Programming
 # Total time it took to complete --- 4 hours ---
 
+
+
+'''
+This program allows the user to enter in a list (Ex: 1,19,28,19) and sort and search through it.
+Implementations of both merge sort to sort the list and binary search to search for a given
+value inside of that sorted list are present in this program.
+
+How to use 
+1. Enter in your list.
+2. Press 'Merge sort' to sort your list in ascending order.
+3. Enter a search value you would like to look for in your list.
+4. Hit 'Search' to search for your given value in your list.
+'''
+
 import PySimpleGUI as sg
+
+total_swaps = 0
 
 def main():
     class SortGUI:
@@ -23,7 +39,7 @@ def main():
                 [sg.T("Number of Swaps:"), sg.T(key="swaps")],
                 [sg.T("Enter a value that you would like to search for:")],
                 [sg.I(key='search_value')],
-                [sg.B("Enter", key='binary_search')],
+                [sg.B("Search", key='binary_search')],
                 [sg.T("Search results:", key='search_results')],
                 
                 
@@ -53,6 +69,7 @@ def main():
 
                 # Displays Help screen 
                 elif event == 'Help':
+                    ''' Help page dropdown content'''
                     help_section = ''' '''
 
                     sg.popup(help_section, title="Help")
@@ -61,6 +78,7 @@ def main():
 
         
                 elif event =='About':
+                    ''' About page dropdown content '''
                     about_content = '' +\
                         'Design: \n\n' +\
                         'Develop: \n\n' +\
@@ -71,18 +89,20 @@ def main():
 
 
                 elif event == 'enter_list':
+                    ''' Enters, validates, and stores user list.'''
+
                     self.validate_list(event, values)
                     self.window['current_list'].update("Your current list is: {}".format(values['user_list']))
 
-                    pass
+                    
 
                 elif event =='binary_search':
+                    ''' Handles the enter button for searching a value using binary search '''
                     
                     search_value = int(values['search_value'])
-
                     self.window['search_results'].update(self.binary_search(search_value, result))
 
-                    pass
+                    
 
                 elif event == 'merge_sort':
                     ''' Merge sort button is pressed, sorts user list and updates window to show sorted list'''
@@ -92,10 +112,10 @@ def main():
                     listofint = list(map_object)
 
                     result = self.merge_sort(listofint)
+                    self.window['swaps'].update(total_swaps)
                     self.window['sorted_list'].update("Your current sorted list is: {}".format(result))
 
-                    pass
-
+                    
         def validate_list(self, events, values):
             ''' Handle when enter button is pressed'''
             user_list = values['user_list']
@@ -133,7 +153,12 @@ def main():
                     end = middle - 1
                     step += 1
                     comparisons += 1
+
+            # handling if integer was not found in list
+            if found == False:
+                return str("The integer was not found.")
                 
+            # if found, return a string stating where it is and in how many steps
             string = str(("The value {} is at index {}, found in {} steps\n".format(search_value, middle, step)))
 
             return string
@@ -141,42 +166,46 @@ def main():
 
         def merge_sort(self, array):
             ''' Sorts a given array with merge sort O(n log(n))'''
+            # handles if array is too small
             if len(array) <= 1:
                 return array
 
             midpoint = int(len(array) / 2)    
 
+            # initializes and recursively calls a left and right array 
+            # the left is from the 0 index to midpoint and the right is up to midpoint to end
             left, right = self.merge_sort(array[:midpoint]), self.merge_sort(array[midpoint:])
 
             return self.merge(left,right)
 
         def merge(self, left, right):
+            ''' Merges the two arrays given from merge_sort function'''
+
             print(left,right)
             results = []
-            #swaps = 0
-            left_pointer = right_pointer = 0
+            global total_swaps
+            left_pointer = right_pointer = 0    # index pointers used to compare values
             
+            # while there are still numbers left inside each seperate array to compare,
+            # continue to evaluate and swap them.
             while left_pointer < len(left) and right_pointer < len(right):
 
                 if left[left_pointer] < right[right_pointer]:
 
                     results.append(left[left_pointer])
                     left_pointer += 1
-                    #swaps += 1
+                    total_swaps += 1
 
                 else:
                     results.append(right[right_pointer])
                     right_pointer += 1
-                    #swaps += 1
+                    total_swaps += 1
 
-
+    
             results.extend(left[left_pointer:])
             results.extend(right[right_pointer:])
 
-            return results #,swaps 
-            # results is a list, swaps would be an int, I have tried converting
-            # both to same type, as well as using self.swaps as I would somehow need to keep track of the swaps
-            # with also recurssively calling the function in merge_sort.
+            return results 
             
 
     # Instantiate our class and run it
