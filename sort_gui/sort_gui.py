@@ -14,17 +14,20 @@ def main():
             layout = [
                 [sg.T("Enter a List you would like to search or sort through:")],
                 [sg.I(key='user_list')],
+
                 [sg.B('Enter', key = 'enter_list')],
                 [sg.T("Your current list is:", key='current_list')],
+                [sg.T("Your current sorted list is:", key='sorted_list')],
 
-                [sg.B('Merge sort')],
+                [sg.B('Merge sort', key='merge_sort')],
                 [sg.T("Number of Swaps:"), sg.T(key="swaps")],
                 [sg.T("Enter a value that you would like to search for:")],
                 [sg.I(key='search_value')],
-                [sg.T("Enter a List you would like to sort:")],
+                [sg.B("Enter", key='binary_search')],
+                [sg.T("Search results:", key='search_results')],
                 
                 
-                [sg.StatusBar("Need input", key='StatusBar')],
+                [sg.StatusBar("Welcome to Alex's Sort Gui!", key='StatusBar')],
                 [sg.Menu(
                     [['Quit and Help', ['Quit', 'Help' ]],
                     ['About that work', 'About']], key='-MenuBar-')],
@@ -75,12 +78,23 @@ def main():
 
                 elif event =='binary_search':
                     
-                    search_value = values['search_value']
-                    array = values['user_list']
+                    search_value = int(values['search_value'])
 
-                    sorted_user_array = self.binary_search(search_value, array)
+                    self.window['search_results'].update(self.binary_search(search_value, result))
 
-                    return
+                    pass
+
+                elif event == 'merge_sort':
+                    ''' Merge sort button is pressed, sorts user list and updates window to show sorted list'''
+                    
+                    user_list = values['user_list'].split(",")
+                    map_object = map(int, user_list)
+                    listofint = list(map_object)
+
+                    result = self.merge_sort(listofint)
+                    self.window['sorted_list'].update("Your current sorted list is: {}".format(result))
+
+                    pass
 
         def validate_list(self, events, values):
             ''' Handle when enter button is pressed'''
@@ -91,7 +105,7 @@ def main():
 
 
 
-        def binary_search(search_value, array):
+        def binary_search(self, search_value, array):
             ''' Search through array with binary sort O(log n)'''
             start = 0
             end = len(array)-1
@@ -120,12 +134,55 @@ def main():
                     step += 1
                     comparisons += 1
                 
-            print("The value {} is at index {}, found in {} steps\n".format(search_value, array[middle], step))
+            string = str(("The value {} is at index {}, found in {} steps\n".format(search_value, middle, step)))
 
+            return string
+
+
+        def merge_sort(self, array):
+            ''' Sorts a given array with merge sort O(n log(n))'''
+            if len(array) <= 1:
+                return array
+
+            midpoint = int(len(array) / 2)    
+
+            left, right = self.merge_sort(array[:midpoint]), self.merge_sort(array[midpoint:])
+
+            return self.merge(left,right)
+
+        def merge(self, left, right):
+            print(left,right)
+            results = []
+            #swaps = 0
+            left_pointer = right_pointer = 0
+            
+            while left_pointer < len(left) and right_pointer < len(right):
+
+                if left[left_pointer] < right[right_pointer]:
+
+                    results.append(left[left_pointer])
+                    left_pointer += 1
+                    #swaps += 1
+
+                else:
+                    results.append(right[right_pointer])
+                    right_pointer += 1
+                    #swaps += 1
+
+
+            results.extend(left[left_pointer:])
+            results.extend(right[right_pointer:])
+
+            return results #,swaps 
+            # results is a list, swaps would be an int, I have tried converting
+            # both to same type, as well as using self.swaps as I would somehow need to keep track of the swaps
+            # with also recurssively calling the function in merge_sort.
+            
 
     # Instantiate our class and run it
     sort_gui = SortGUI()
     sort_gui.run()
+    
 
 if __name__ == '__main__':
     main()
