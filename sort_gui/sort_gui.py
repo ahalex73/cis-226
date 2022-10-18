@@ -16,6 +16,8 @@ How to use
 2. Press 'Merge sort' to sort your list in ascending order.
 3. Enter a search value you would like to look for in your list.
 4. Hit 'Search' to search for your given value in your list.
+
+Some extra documentation can be found in the About page.
 '''
 
 import PySimpleGUI as sg
@@ -70,7 +72,11 @@ def main():
                 # Displays Help screen 
                 elif event == 'Help':
                     ''' Help page dropdown content'''
-                    help_section = ''' '''
+                    help_section = "How to use\n\n" +\
+                        "1. Enter in your list.\n\n" +\
+                        "2. Press 'Merge sort' to sort your list in ascending order.\n\n" +\
+                        "3. Enter a search value you would like to look for in your list.\n\n" +\
+                        "4. Hit 'Search' to search for your given value in your list.\n\n" 
 
                     sg.popup(help_section, title="Help")
                     print("A popup should display. If not," + \
@@ -80,10 +86,10 @@ def main():
                 elif event =='About':
                     ''' About page dropdown content '''
                     about_content = '' +\
-                        'Design: \n\n' +\
-                        'Develop: \n\n' +\
+                        'Design: The design of the Sort GUI was to display the effectiveness of the binary search and merge sort algorithms.\n\n' +\
+                        'Develop: Using python and PySimpleGUI, the Sort GUI was able to be created.\n\n' +\
                         'Test: There are no tests.\n\n'+\
-                        'Document: '
+                        'Document: The only file required is the sort_gui.py file, the requirements.txt file is to show what version of PySimpleGUI it is running.'
                 
                     sg.popup(about_content, title="About")
 
