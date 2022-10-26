@@ -20,65 +20,64 @@ import sqlite3
 import sys
 
 
-def main():
+class Vegetables:
+    def __init__(self, db='my_data.db'):
+        """Connecting to our database and creating a cursor to pass in SQL"""
+        self.conn = sqlite3.connect(db)
+        self.c = self.conn.cursor()
 
-    class Vegetables:
-        def __init__(self):
-            """Connecting to our database and creating a cursor to pass in SQL"""
-            self.conn = sqlite3.connect('my_data.db')
-            self.c = self.conn.cursor()
+    def setup(self):
+        """Setup a table if it does not already exist inside our database"""
+        self.c.execute("CREATE TABLE IF NOT EXISTS vegetable (quantity integer, name text)")
+        self.conn.commit()
 
-        def setup(self):
-            """Setup a table if it does not already exist inside our database"""
-            self.c.execute("CREATE TABLE IF NOT EXISTS vegetable (quantity integer, name text)")
+    def show_all(self):
+        """Shows all values from the vegetable table"""
+        for row in self.c.execute("SELECT * FROM vegetable"):
+            print(row)
+
+
+    def add_vegetable(self, name, quantity):
+        """Add vegetable to our vegetable table"""
+        try:
+            self.c.execute("INSERT INTO vegetable VALUES (?, ?)", [int(quantity), str(name)])
             self.conn.commit()
+        except ValueError:
+            print("Invalid name or quantity values.")
+            sys.exit()
 
-        def show_all(self):
-            """Shows all values from the vegetable table"""
-            for row in self.c.execute("SELECT * FROM vegetable"):
-                print(row)
-  
+    def update_vegetable(self, name, quantity):
+        self.c.execute("SELECT quantity, name FROM vegetable WHERE name=?", [name])
+        try:
+            self.c.execute("UPDATE vegetable SET quantity=? WHERE name=?", [quantity, name])
+            self.conn.commit()
+        except ValueError:
+            print("Invalid name or quantity values.")
+            sys.exit()
+        
 
-        def add_vegetable(self, name, quantity):
-            """Add vegetable to our vegetable table"""
-            try:
-                self.c.execute("INSERT INTO vegetable VALUES (?, ?)", [int(quantity), str(name)])
-                self.conn.commit()
-            except ValueError:
-                print("Invalid name or quantity values.")
-                sys.exit()
+    def find_vegetable(self, name):
+        """Find a vegetable in our table"""
+        self.c.execute("SELECT quantity, name FROM vegetable WHERE name=?", [name])
+        row = self.c.fetchone() 
+        return row
 
-        def update_vegetable(self, name, quantity):
-            self.c.execute("SELECT quantity, name FROM vegetable WHERE name=?", [name])
-            try:
-                self.c.execute("UPDATE vegetable SET quantity=? WHERE name=?", [quantity, name])
-                self.conn.commit()
-            except ValueError:
-                print("Invalid name or quantity values.")
-                sys.exit()
-            
+    def delete_vegetable(self, name):
+        found = self.c.execute("SELECT quantity, name FROM vegetable WHERE name=?", [name])
+        if found:
+            self.c.execute("DELETE FROM vegetable WHERE name=?", [name])
+            self.conn.commit() # Save work so far
+            print("{} has been removed".format(name))
 
-        def find_vegetable(self, name):
-            """Find a vegetable in our table"""
-            self.c.execute("SELECT quantity, name FROM vegetable WHERE name=?", [name])
-            row = self.c.fetchone() 
-            return row
+        else:
+            print("Unable to find {}".format(name))
 
-        def delete_vegetable(self, name):
-            found = self.c.execute("SELECT quantity, name FROM vegetable WHERE name=?", [name])
-            if found:
-                self.c.execute("DELETE FROM vegetable WHERE name=?", [name])
-                self.conn.commit() # Save work so far
-                print("{} has been removed".format(name))
+        return
 
-            else:
-                print("Unable to find {}".format(name))
+    def close(self):
+        self.conn.close()
 
-            return
-
-        def close(self):
-            self.conn.close()
-
+if __name__ == '__main__':
     print("-=-=-=-=-=-")
     v = Vegetables()
     v.setup()
@@ -116,17 +115,3 @@ def main():
         
         case _:
             print("Invalid Command.")
-
-    # in_operation = True # Flag indicating whether the user wants to keep entering commands or not
-    # while in_operation:
-    # stop = input("Would you like to stop using commands? (y/n): ")    
-    # if stop == "y" or "Y":
-    #     in_operation = False
-    # elif stop =="n" or "N":
-    #     pass
-    # else:
-    #     input("Please enter a valid option.")
-    
-
-if __name__ == '__main__':
-    main()
