@@ -2,18 +2,29 @@
 # 10/26/22
 # CRN: 10235
 # CIS 226: Advanced Python Programming
-# Total time it took to complete --- 2 hours ---
+# Total time it took to complete --- 4 hours ---
 
 '''
 This console program allows the user to use the program_console_db utility tool. This tool
-calls for one initial parameter - the syntax being "python program_console_db (command)".
-This can consist of Add, Get, Change, ShowAll, Delete. 
+calls for one initial parameter - the syntax: "python program_console_db (command)".
+This can consist of Add, Get, Change, ShowAll, Delete. You will then be prompted accordingly
+To specify changes/options.
 
 Add     - Add a new vegetable 
 Get     - Gets a vegetables quantity
 Change  - Updates a vegetable's quantity
 ShowAll - Shows all of the contents of the vegetable table
 Delete  - Deletes specified vegetable
+
+Design: The program was created using system arguments, python, capsys, and pytest,
+        it is designed allow the user to manipulate the database inside of the console.
+Develop: I researched on pytest, classes, and SQL syntax, as well as referenced the given materials.
+Test: Tests the add_vegetable, update_vegetable, and delete_vegetable functions
+      testing the output given by capsys in a new database to test functionality.
+Document: The program_console_db.py file contains the functionality of the program_console_db utility tool
+      This tool allows you to use commands to manipulate a database. As well as a test_program_console.py file
+      that tests the functionality of some functions in the program_console_db file.
+      There should also be requirements.txt and an example database called "my_data.db" available.
 
 '''
 import sqlite3
@@ -96,10 +107,12 @@ if __name__ == '__main__':
             v.show_all()
 
         case "Get":
+            """Finds the vegetable that the user wishes to search for"""
             item_name = input("Enter the vegetable you'd like to see the quantity of: ")
             print(v.find_vegetable(str(item_name)))
 
         case "Change":
+            """Updates an already existing vegetable in the table"""
             v.show_all()
             item_name = input("Enter the item you'd like to change: ")
             varied_quantity = input("Enter the new quantity: ")
@@ -107,11 +120,14 @@ if __name__ == '__main__':
             v.show_all()
 
         case "ShowAll":
+            """Shows all vegetables and quantities"""
             v.show_all()
 
         case "Delete":
+            """Deletes a specified vegetable"""
             item_name = input("Enter the item you'd like to delete: ")
             v.delete_vegetable(item_name)
         
         case _:
+            """Edge case if sql_command from user is not entered correctly"""
             print("Invalid Command.")

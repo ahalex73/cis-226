@@ -2,13 +2,14 @@
 # 10/26/22
 # CRN: 10235
 # CIS 226: Advanced Python Programming
-# Total time it took to complete --- 2 hours ---
+# Total time it took to complete --- 4 hours ---
 
 import program_console_db
 import pytest
 
 @pytest.fixture
 def veg_conn():
+    """Sets up a database connection"""
     veg_conn = program_console_db.Vegetables(db=":memory:")
     veg_conn.setup()
 
