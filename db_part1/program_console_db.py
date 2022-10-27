@@ -89,45 +89,48 @@ class Vegetables:
         self.conn.close()
 
 if __name__ == '__main__':
-    print("-=-=-=-=-=-")
-    v = Vegetables()
-    v.setup()
+    def main():
+        print("-=-=-=-=-=-")
+        v = Vegetables()
+        v.setup()
 
-    if len(sys.argv) < 2 or len(sys.argv) > 2:
-        sys.stdout.write("Too many arguments, please input the desired sql command (Add, Get, Change, Delete, ShowAll)\n")
-    sql_command = sys.argv[1]
+        if len(sys.argv) < 2 or len(sys.argv) > 2:
+            sys.stdout.write("Too many arguments, please input the desired sql command (Add, Get, Change, Delete, ShowAll)\n")
+        sql_command = sys.argv[1]
 
-    match sql_command:
-        case "Add":
-            """User enters in the add command, uses an item and a quantity to add to our database table"""
-            print("Please enter a vegetable to add, and the desired quantity")
-            item_name = input("Enter a vegetable to add: ")
-            item_quantity = input("Enter a quantity: ")
-            v.add_vegetable(str(item_name), item_quantity)
-            v.show_all()
+        match sql_command:
+            case "Add":
+                """User enters in the add command, uses an item and a quantity to add to our database table"""
+                print("Please enter a vegetable to add, and the desired quantity")
+                item_name = input("Enter a vegetable to add: ")
+                item_quantity = input("Enter a quantity: ")
+                v.add_vegetable(str(item_name), item_quantity)
+                v.show_all()
 
-        case "Get":
-            """Finds the vegetable that the user wishes to search for"""
-            item_name = input("Enter the vegetable you'd like to see the quantity of: ")
-            print(v.find_vegetable(str(item_name)))
+            case "Get":
+                """Finds the vegetable that the user wishes to search for"""
+                item_name = input("Enter the vegetable you'd like to see the quantity of: ")
+                print(v.find_vegetable(str(item_name)))
 
-        case "Change":
-            """Updates an already existing vegetable in the table"""
-            v.show_all()
-            item_name = input("Enter the item you'd like to change: ")
-            varied_quantity = input("Enter the new quantity: ")
-            v.update_vegetable(item_name, varied_quantity)
-            v.show_all()
+            case "Change":
+                """Updates an already existing vegetable in the table"""
+                v.show_all()
+                item_name = input("Enter the item you'd like to change: ")
+                varied_quantity = input("Enter the new quantity: ")
+                v.update_vegetable(item_name, varied_quantity)
+                v.show_all()
 
-        case "ShowAll":
-            """Shows all vegetables and quantities"""
-            v.show_all()
+            case "ShowAll":
+                """Shows all vegetables and quantities"""
+                v.show_all()
 
-        case "Delete":
-            """Deletes a specified vegetable"""
-            item_name = input("Enter the item you'd like to delete: ")
-            v.delete_vegetable(item_name)
-        
-        case _:
-            """Edge case if sql_command from user is not entered correctly"""
-            print("Invalid Command.")
+            case "Delete":
+                """Deletes a specified vegetable"""
+                item_name = input("Enter the item you'd like to delete: ")
+                v.delete_vegetable(item_name)
+            
+            case _:
+                """Edge case if sql_command from user is not entered correctly"""
+                print("Invalid Command.")
+
+    main()
