@@ -4,7 +4,6 @@
 # CIS 226: Advanced Python Programming
 # Total time it took to complete --- 3 hours ---
 
-
 """
 This program allows the end user to run a local page using a flask command.
 
