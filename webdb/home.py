@@ -4,6 +4,23 @@
 # CIS 226: Advanced Python Programming
 # Total time it took to complete --- 3 hours ---
 
+
+"""
+This program allows the end user to run a local page using a flask command.
+
+How to use:
+    In a terminal type in the command 'flask --app home.py run' and it will prompt you
+    to click on a local link to the page.
+
+    When you are on the page you can view the database of orders, as well as enter and submit any new ones.
+
+Design: The design of the website was to be able to view previous orders made to the database, as well as create new ones
+Develop: I used SQLite, Flask, Bootstrap, and HTML to create the Order Catalog
+Test: This program has no tests.
+Document: The only other files required are a virtual environment to download dependencies in,
+    home.py, requirements.txt (file containing dependencies), db.sqlite3 (the database), and the templates folder containing base.html
+"""
+
 import sqlite3
 from flask import Flask, flash, render_template, request, redirect, url_for
 
