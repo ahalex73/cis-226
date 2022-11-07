@@ -1,3 +1,11 @@
+<!--
+ Alexander Holmes
+ 11/7/22
+ CRN: 10235
+ CIS 226: Advanced Python Programming
+ Total time it took to complete - 3 hours  
+-->
+
 <!doctype html>
 <html lang="en-US">
   <head>
@@ -22,7 +30,7 @@
     <form method="POST">
       <label>Name: <input type="text" name="name" value="{{ name }}"></label>&nbsp;
       <label>Quantity: <input type="number" name="quantity" value="{{ quantity }}"></label>
-      <label>Price per pound "0.00": <input type="number" step="0.01" name="price" value="{{ price }}"></label>
+      <label>Price per item "0.00": <input type="number" step="0.01" name="price" value="{{ price }}"></label>
       <button type="submit">Add</button>
     </form>
     <hr>
@@ -31,7 +39,7 @@
         <tr>
           <th scope="col">Name</th>&nbsp;
           <th scope="col">Quantity</th>&nbsp;
-          <th scope="col">Price Per Pound</th>&nbsp;
+          <th scope="col">Price Per Item</th>&nbsp;
           <th scope="col">Total Price</th>&nbsp;
         </tr>
       </thead>

@@ -1,3 +1,9 @@
+# Alexander Holmes
+# 11/7/22
+# CRN: 10235
+# CIS 226: Advanced Python Programming
+# Total time it took to complete --- 3 hours ---
+
 import sqlite3
 from flask import Flask, flash, render_template, request, redirect, url_for
 
@@ -38,29 +44,19 @@ class Vegetables:
                 "UPDATE vegetable SET name=?, quantity=?, price=?, total_price WHERE pk=?",
                 [name, quantity, price, total_price, pk])
         else:
-            # Do an INSERT
+            # Do an INSERT 
+            # Technically we're only doing an insert here as we are never selecting the primary key
+            # I just wanted to add a primary key for some fun.
+            
             self.c.execute(
                 "INSERT INTO vegetable (name, quantity, price, total_price) VALUES (?, ?, ?, ?)",
                 [name, quantity, price, total_price])
 
             # Get a pk for the insert
             pk = self.c.lastrowid
-        
 
         self.conn.commit()
 
-    def find_vegetable(self, name):
-        self.c.execute("SELECT * FROM vegetable WHERE name=?", [name])
-        row = self.c.fetchone() # Get first row
-        return row
-
-    # def get_total_price(self, quantity, price, pk):
-    #     """Gets the total price for each item"""
-    #     self.c.execute("SELECT quantity, price WHERE pk=?", [quantity, price, pk])
-    #     total_price = quantity * price
-    #     self.c.execute("INSERT INTO vegetable (total_price) VALUES (?)", [total_price])
-        
-    #     self.conn.commit()
 
 def db_setup():
     """Setup the db if needed"""
@@ -75,6 +71,7 @@ app.before_first_request(db_setup)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """Home Page View"""
     pk = 0
     price = ''
     total_price = ''
