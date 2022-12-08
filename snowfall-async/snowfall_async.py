@@ -1,3 +1,9 @@
+# Alexander Holmes
+# 9/27/22
+# CRN: 10235
+# CIS 226: Advanced Python Programming
+# Total time it took to debug --- 45 seconds ---
+
 import asyncio
 import random
 
@@ -67,7 +73,7 @@ async def run_game(queue_left, queue_right):
                 # Remove from the queue if we can
                 try:
                     queue_right.get_nowait()
-                except asyncio.QueueFull:
+                except asyncio.QueueEmpty:
                     pass
 
         # Increment animation index, and wrap around to 0
@@ -87,7 +93,7 @@ async def make_snow(queue_left, queue_right):
             # Put something in the queue if there's room
             try:
                 queue_left.put_nowait(1)
-            except asyncio.QueueEmpty:
+            except asyncio.QueueFull:
                 pass
 
         if random.random() > 0.75:
